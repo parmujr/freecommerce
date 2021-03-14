@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "340743966074",
+    "project_id": "free-commerce-2d82f",
+    "storage_bucket": "free-commerce-2d82f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:340743966074:android:06d008c52517ded4721ac3",
+        "android_client_info": {
+          "package_name": "com.free.commerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "340743966074-vjso00jlgoli4j7a2glo3a3i6pfjteg8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLFlNG34musN9cR_s6HJ1ztsDwiL_kzYE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "340743966074-vjso00jlgoli4j7a2glo3a3i6pfjteg8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
