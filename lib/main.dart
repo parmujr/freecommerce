@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_free_commerce/views/home_view.dart';
+import 'package:flutter_free_commerce/views/wigets/product_add_edit_form.dart';
 
 void main() {
   runApp(MyApp());
@@ -26,7 +27,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Flutter e-commerce',
       home:
-          initialized ? HomeView() : Center(child: CircularProgressIndicator()),
+          initialized ? ProductAddEditView() : Center(child: CircularProgressIndicator()),
     );
   }
 
