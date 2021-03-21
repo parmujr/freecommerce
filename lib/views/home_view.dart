@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_free_commerce/controllers/auth_controller.dart';
 import 'package:flutter_free_commerce/controllers/product_controller.dart';
 import 'package:flutter_free_commerce/models/models.dart';
 import 'package:flutter_free_commerce/services/product_service.dart';
@@ -7,21 +8,7 @@ import 'package:flutter_free_commerce/views/wigets/cart_icon.dart';
 import 'package:flutter_free_commerce/views/wigets/product_add_edit_form.dart';
 
 
-class HomeView extends StatefulWidget {
-  @override
-  _HomeViewState createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
-  final ProductController productController = ProductController();
-
-  @override
-  void initState() {
-    loadData();
-
-    super.initState();
-  }
-
+class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -29,7 +16,16 @@ class _HomeViewState extends State<HomeView> {
         appBar: AppBar(
           centerTitle: false,
           title: Text("Free Commerce"),
-          actions: [CartIcon()],
+          actions: [
+            IconButton(
+              icon: Icon(Icons.logout),
+              onPressed: () {
+                signOut();
+
+              },
+            ),
+            CartIcon()
+          ],
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -75,10 +71,5 @@ class _HomeViewState extends State<HomeView> {
         ),
       ),
     );
-  }
-
-  void loadData() async {
-    await productController.getProducts();
-    setState(() {});
   }
 }
