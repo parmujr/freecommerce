@@ -5,15 +5,14 @@ class AuthView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Text("Free Commerce"),
+        ),
         body: Container(
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  "Free Commerce",
-                  style: TextStyle(fontSize: 40.0),
-                ),
                 ElevatedButton(
                   onPressed: () {},
                   child: Text("SignIn With Google"),
