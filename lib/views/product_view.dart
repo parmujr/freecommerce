@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_free_commerce/models/models.dart';
-import 'package:flutter_free_commerce/views/wigets/cart_icon.dart';
-import 'package:flutter_free_commerce/views/wigets/product_add_edit_form.dart';
+import 'package:flutter_free_commerce/views/widgets/cart_icon.dart';
+import 'package:flutter_free_commerce/views/widgets/product_add_edit_form.dart';
 
 import 'checkout_view.dart';
 

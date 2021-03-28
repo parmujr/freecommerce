@@ -42,7 +42,6 @@ class ProductAddEditView extends StatelessWidget {
                 }
               },
             )
-
           ],
         ),
         body: Form(
@@ -65,7 +64,7 @@ class ProductAddEditView extends StatelessWidget {
               TextFormField(
                 keyboardType: TextInputType.number,
                 initialValue:
-                product.price != null ? product.price.toString() : '',
+                    product.price != null ? product.price.toString() : '',
                 validator: (value) => _validate(value, "Price"),
                 decoration: InputDecoration(
                   labelText: "Product price",
@@ -112,6 +111,7 @@ class ProductAddEditView extends StatelessWidget {
       ),
     );
   }
+
   _validate(value, fieldName) {
     if (value.isEmpty) {
       return "$fieldName is required.";

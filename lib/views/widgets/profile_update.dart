@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_free_commerce/models/profile_models.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -28,20 +27,21 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                         form.save();
 
                         /// form data is now valid. you may save to db.
-                        if (profile.name != null) {
+                        if (profile.id != null) {
                           FirebaseFirestore.instance
                               .collection("Profiles")
-                              .doc(profile.name)
-                              .set(profile.toMap(), SetOptions(merge: true));
+                              .doc(profile.id)
+                              .set(
+                                profile.toMap(),
+                              );
                         } else {
                           FirebaseFirestore.instance
                               .collection("Profiles")
                               .doc()
-                              .set(profile.toMap(), SetOptions(merge: true));
+                              .set(
+                                profile.toMap(),
+                              );
                         }
-
-                        Navigator.pop(context,);
-
                       }
                     })
               ],
@@ -85,22 +85,6 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.zero)),
-                            labelText: "D.O.B."),
-                        initialValue: profile.dob,
-                        validator: (value) => _validate(value, "D.O.B"),
-                        onSaved: (value) {
-                          profile.dob = value;
-                        },
-                        keyboardType: TextInputType.number,
-                      ),
-
-                      SizedBox(
-                        height: 10,
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.zero)),
                             labelText: "E-mail"),
                         initialValue: profile.email,
                         validator: (value) => _validate(value, "E-mail"),
@@ -128,9 +112,6 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                       SizedBox(
                         height: 40,
                       ),
-                      Center(
-                          child: ElevatedButton(
-                              onPressed: () {}, child: Text("Submit")))
                     ],
                   ),
                 ),

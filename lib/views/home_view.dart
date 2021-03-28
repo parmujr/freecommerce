@@ -3,8 +3,8 @@ import 'package:flutter_free_commerce/controllers/auth_controller.dart';
 import 'package:flutter_free_commerce/models/models.dart';
 import 'package:flutter_free_commerce/services/product_service.dart';
 import 'package:flutter_free_commerce/views/product_view.dart';
-import 'package:flutter_free_commerce/views/wigets/cart_icon.dart';
-import 'package:flutter_free_commerce/views/wigets/product_add_edit_form.dart';
+import 'package:flutter_free_commerce/views/widgets/cart_icon.dart';
+import 'package:flutter_free_commerce/views/widgets/product_add_edit_form.dart';
 
 
 class HomeView extends StatelessWidget {

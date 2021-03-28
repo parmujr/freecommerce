@@ -7,54 +7,51 @@ Profile profileFromMap(String str) => Profile.fromMap(json.decode(str));
 
 String profileToMap(Profile data) => json.encode(data.toMap());
 
-class Profile{
+class Profile {
   Profile({
+    this.id,
     this.name,
     this.address,
-    this.dob,
     this.email,
     this.phone,
   });
 
-
+  String id;
   String name;
   String address;
-  String dob;
   String email;
   String phone;
 
   Profile copyWith({
-   String name,
-   String address,
-   String dob,
-   String email,
-   String phone,
+    String id,
+    String name,
+    String address,
+    String email,
+    String phone,
   }) =>
       Profile(
-
-        name:name ?? this.name,
+        id: id ?? this.id,
+        name: name ?? this.name,
         address: address ?? this.address,
-        dob: dob ?? this.dob,
         email: email ?? this.email,
         phone: phone ?? this.phone,
       );
 
+  ///fromMap
   factory Profile.fromMap(Map<String, dynamic> json) => Profile(
+        id: json["id"] == null ? null : json["id"],
+        name: json["name"] == null ? null : json["name"],
+        address: json["address"] == null ? null : json["address"],
+        email: json["email"] == null ? null : json["email"],
+        phone: json["phone"] == null ? null : json["phone"],
+      );
 
-    name: json["name"] == null ? null : json["name"],
-    address: json["address"] == null ? null : json["address"],
-    dob: json["dob"] == null ? null : json["dob"],
-    email: json["email"] == null ? null : json["email"],
-    phone: json["phone"] == null ? null : json["phone"],
-
-  );
-
+  ///toMap
   Map<String, dynamic> toMap() => {
-    "name": name == null ? null : name,
-    "address": address == null ? null : address,
-    "dob": dob == null ? null : dob,
-    "email": email == null ? null : email,
-    "phone": phone == null ? null : phone,
-
-  };
+        "id": id == null ? null : id,
+        "name": name == null ? null : name,
+        "address": address == null ? null : address,
+        "email": email == null ? null : email,
+        "phone": phone == null ? null : phone,
+      };
 }
