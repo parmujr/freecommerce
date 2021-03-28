@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_free_commerce/controllers/auth_controller.dart';
-import 'package:flutter_free_commerce/controllers/product_controller.dart';
 import 'package:flutter_free_commerce/models/models.dart';
 import 'package:flutter_free_commerce/services/product_service.dart';
 import 'package:flutter_free_commerce/views/product_view.dart';

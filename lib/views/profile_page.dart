@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_free_commerce/models/profile_models.dart';
+
 
 class ProfilePage extends StatefulWidget {
+  ProfilePage(Profile profile);
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 
