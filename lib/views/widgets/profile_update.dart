@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_free_commerce/models/profile_models.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_free_commerce/views/profile_view.dart';
 
 class ProfileUpdate extends StatefulWidget {
   @override
@@ -9,6 +11,8 @@ class ProfileUpdate extends StatefulWidget {
 
 class _ProfileUpdateState extends State<ProfileUpdate> {
   Profile profile = Profile();
+
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -20,109 +24,103 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
               actions: [
                 IconButton(
                     icon: Icon(Icons.save),
-                    onPressed: () {
+                    onPressed: () async {
                       var form = _formKey.currentState;
-                      if (form.validate()) {
-                        /// data is valid. lets save the form.
-                        form.save();
 
-                        /// form data is now valid. you may save to db.
-                        if (profile.id != null) {
-                          FirebaseFirestore.instance
-                              .collection("Profiles")
-                              .doc(profile.id)
-                              .set(
-                                profile.toMap(),
-                              );
-                        } else {
-                          FirebaseFirestore.instance
-                              .collection("Profiles")
-                              .doc()
-                              .set(
-                                profile.toMap(),
-                              );
-                        }
+                      ///
+                      /// 1. Validate the form data by calling form.validate()
+                      if (form.validate()) {
+                        /// 2. Save the form fields value by calling form.save()
+                        form.save();
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ProfileView(profile)));
+                        /// 3. Save data to the server/ database by calling service.save()
+                        /// get firebase auth uid
+                        var user = FirebaseAuth.instance.currentUser;
+                        if (user != null) {
+                          try {
+                            await FirebaseFirestore.instance
+                                .collection("Profiles")
+                                .doc(user.uid)
+                                .set(profile.toMap());
+                          } catch (e) {
+                            final snackBar = SnackBar(
+                                backgroundColor: Colors.red,
+                                content: Text('Sorry! something went wrong'));
+
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          }
+                        } else {}
+
+
                       }
                     })
               ],
             ),
-            body: Form(
-              key: _formKey,
-              child: Container(
-                padding: EdgeInsets.all(10),
-                child: SingleChildScrollView(
-                  child: Column(
+            body: Container(
+              child: Form(
+                key: _formKey,
+                  child: ListView(
                     children: [
                       TextFormField(
+                        initialValue: profile.name,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.zero)),
                             labelText: "Name"),
-                        initialValue: profile.name,
-                        validator: (value) => _validate(value, "Name"),
-                        onSaved: (value) {
-                          profile.name = value;
-                        },
+                        validator: (value) =>
+                            value.isEmpty ? "Please enter your name" : null,
+                        onSaved: (value) => profile.name = value,
                       ),
                       SizedBox(
                         height: 10,
                       ),
                       TextFormField(
+                        initialValue: profile.address,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.zero)),
                             labelText: "Address"),
-                        initialValue: profile.address,
-                        validator: (value) => _validate(value, "Address"),
-                        onSaved: (value) {
-                          profile.address = value;
-                        },
+                        validator: (value) =>
+                            value.isEmpty ? "Please enter your address" : null,
+                        onSaved: (value) => profile.address = value,
                       ),
                       SizedBox(
                         height: 10,
                       ),
                       TextFormField(
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.zero)),
-                            labelText: "E-mail"),
                         initialValue: profile.email,
-                        validator: (value) => _validate(value, "E-mail"),
-                        onSaved: (value) {
-                          profile.email = value;
-                        },
-                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.zero)),
+                            labelText: "Email"),
+                        validator: (value) =>
+                        value.isEmpty ? "Please enter your email id" : null,
+                        onSaved: (value) => profile.email = value,
                       ),
                       SizedBox(
                         height: 10,
                       ),
                       TextFormField(
+                        initialValue: profile.phone,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.zero)),
-                            labelText: "Phone No."),
-                        initialValue: profile.phone,
-                        validator: (value) => _validate(value, "Phone No"),
-                        onSaved: (value) {
-                          profile.phone = value;
-                        },
-                        keyboardType: TextInputType.phone,
+                            labelText: "Phone"),
+                        validator: (value) =>
+                        value.isEmpty ? "Please enter your phone no" : null,
+                        onSaved: (value) => profile.phone = value,
                       ),
-                      // TextFormField()
                       SizedBox(
-                        height: 40,
+                        height: 10,
                       ),
                     ],
                   ),
-                ),
               ),
             )));
-  }
-
-  _validate(value, fieldName) {
-    if (value.isEmpty) {
-      return "$fieldName is required.";
-    } else
-      return null;
   }
 }

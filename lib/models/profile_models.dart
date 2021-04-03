@@ -37,6 +37,7 @@ class Profile {
         phone: phone ?? this.phone,
       );
 
+
   ///fromMap
   factory Profile.fromMap(Map<String, dynamic> json) => Profile(
         id: json["id"] == null ? null : json["id"],
@@ -45,6 +46,7 @@ class Profile {
         email: json["email"] == null ? null : json["email"],
         phone: json["phone"] == null ? null : json["phone"],
       );
+
 
   ///toMap
   Map<String, dynamic> toMap() => {

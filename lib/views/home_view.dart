@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_free_commerce/controllers/auth_controller.dart';
+import 'package:flutter_free_commerce/controllers/profile_controller.dart';
 import 'package:flutter_free_commerce/models/models.dart';
+import 'package:flutter_free_commerce/models/profile_models.dart';
 import 'package:flutter_free_commerce/services/product_service.dart';
 import 'package:flutter_free_commerce/views/product_view.dart';
+import 'package:flutter_free_commerce/views/profile_view.dart';
 import 'package:flutter_free_commerce/views/widgets/cart_icon.dart';
 import 'package:flutter_free_commerce/views/widgets/product_add_edit_form.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_free_commerce/views/widgets/profile_update.dart';
+
+class HomeView extends StatefulWidget {
+  @override
+  _HomeViewState createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  final ProfileController productController = ProfileController();
 
 
-class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -20,11 +33,54 @@ class HomeView extends StatelessWidget {
               icon: Icon(Icons.logout),
               onPressed: () {
                 signOut();
-
               },
             ),
             CartIcon()
           ],
+        ),
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              Container(
+                color: Colors.grey,
+                child: SizedBox(
+                  height: 150.0,
+                  child: Icon(
+                    Icons.person,
+                    size: 60.0,
+                  ),
+                ),
+              ),
+              ListTile(
+                title: Text("Profile"),
+                onTap: () async {
+                  Profile _profile;
+
+                  /// fetch profile from firebase if exist
+                  final user = FirebaseAuth.instance.currentUser;
+                  DocumentSnapshot doc = await FirebaseFirestore.instance
+                      .collection("profiles")
+                      .doc(user.uid)
+                      .get();
+                  if (doc.exists) {
+                    _profile = Profile.fromMap(doc.data());
+                  }
+
+                  if (_profile != null) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProfileView(_profile)));
+                  } else {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProfileUpdate()));
+                  }
+                },
+              )
+            ],
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {

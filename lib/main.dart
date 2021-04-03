@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Flutter e-commerce',
       home:
-      initialized ? ProfileView() : Center(child: CircularProgressIndicator()),
+      initialized ? ProfileUpdate() : Center(child: CircularProgressIndicator()),
     );
   }
 
