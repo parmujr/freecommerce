@@ -5,6 +5,8 @@ import 'package:flutter_free_commerce/views/widgets/product_add_edit_form.dart';
 
 import 'checkout_view.dart';
 
+import 'package:flutter/material.dart';
+
 class ProductView extends StatefulWidget {
   final Product product;
 
@@ -20,7 +22,7 @@ class _ProductViewState extends State<ProductView> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Product"),
+          title: Text("${widget.product.name}"),
           actions: [
             IconButton(
               icon: Icon(Icons.edit),
@@ -61,7 +63,18 @@ class _ProductViewState extends State<ProductView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton(onPressed: () {}, child: Text('Add to Cart')),
+                  ElevatedButton(
+                      onPressed: () {
+                        cart.products.add(widget.product);
+
+                        /// show snack for confirmation
+                        final snak = SnackBar(
+                          content: Text(
+                              "${widget.product.name} is added to your cart"),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snak);
+                      },
+                      child: Text('Add to Cart')),
                   ElevatedButton(
                       onPressed: () {
                         Navigator.push(

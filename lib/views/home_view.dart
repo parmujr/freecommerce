@@ -20,7 +20,6 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   final ProfileController productController = ProfileController();
 
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -59,7 +58,7 @@ class _HomeViewState extends State<HomeView> {
                   /// fetch profile from firebase if exist
                   final user = FirebaseAuth.instance.currentUser;
                   DocumentSnapshot doc = await FirebaseFirestore.instance
-                      .collection("profiles")
+                      .collection("Profiles")
                       .doc(user.uid)
                       .get();
                   if (doc.exists) {
