@@ -15,7 +15,6 @@ class _ShopViewState extends State<ShopView> {
           title: Text("Shopping"),
         ),
         body: Card(
-
           child: Container(
             padding: EdgeInsets.all(20),
             child: Column(
