@@ -1,21 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_free_commerce/main.dart';
+import 'package:flutter_free_commerce/models/models.dart';
+import 'package:flutter_free_commerce/views/widgets/cart_product_item.dart';
 
+class CartView extends StatefulWidget {
+  final List<Product> products;
 
-class CartView extends StatelessWidget {
+  CartView(this.products);
+
+  @override
+  _CartViewState createState() => _CartViewState();
+}
+
+class _CartViewState extends State<CartView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("My Cart"),
-        actions: [
-          IconButton(icon: Icon(Icons.save),
-            onPressed: (){},),
-          IconButton(icon: Icon(Icons.add_shopping_cart),
-          onPressed: (){},)
-        ],
-      ),body: Container(
-
-    ),
+      ),
+      body: Container(
+        child: ListView.builder(
+          itemCount: widget.products.length,
+          itemBuilder: (context, index) => CartItem(widget.products[index], () {
+            setState(() {
+              cart.removeProduct(widget.products[index]);
+            });
+          }),
+        ),
+      ),
     );
   }
 }

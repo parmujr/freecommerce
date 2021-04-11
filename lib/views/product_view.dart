@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_free_commerce/main.dart';
 import 'package:flutter_free_commerce/models/models.dart';
 import 'package:flutter_free_commerce/views/widgets/cart_icon.dart';
 import 'package:flutter_free_commerce/views/widgets/product_add_edit_form.dart';
 
 import 'checkout_view.dart';
 
-import 'package:flutter/material.dart';
 
 class ProductView extends StatefulWidget {
   final Product product;
