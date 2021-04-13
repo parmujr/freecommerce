@@ -2,18 +2,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_free_commerce/models/profile_models.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../models/models.dart';
 import '../profile_view.dart';
-import 'product_add_edit_form.dart';
 
 
+// ignore: must_be_immutable
 class ProfileUpdate extends StatefulWidget {
+  Profile profile = Profile();
+
+  ProfileUpdate({this.profile});
+
   @override
+
   _ProfileUpdateState createState() => _ProfileUpdateState();
 }
 
 class _ProfileUpdateState extends State<ProfileUpdate> {
   Profile profile = Profile();
+
 
 
   final _formKey = GlobalKey<FormState>();
@@ -54,7 +59,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                             builder: (context) => ProfileView(profile)));
                     final snackBar = SnackBar(
                         backgroundColor: Colors.red,
-                        content: Text('Your Profile Has Been Updated'));
+                        content: Text('Your Profile Has Been Updated Successfully'));
 
                     ScaffoldMessenger.of(context)
                         .showSnackBar(snackBar);
@@ -62,45 +67,6 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                 },
               )
             ],
-          ),
-          drawer: Drawer(
-            child: ListView(
-              children: [
-                Container(
-                  color: Colors.grey,
-                  child: SizedBox(
-                    height: 150.0,
-                    child: Icon(
-                      Icons.person,
-                      size: 80.0,
-                    ),
-                  ),
-                ),
-                ListTile(
-                    title: Text("View Profile"),
-                    onTap: () async {
-                      Profile profile;
-
-
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ProfileView(profile)));
-                    }
-                ),
-                ListTile(
-                    title: Text("GoToProduct"),
-                    onTap: () async {
-
-
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ProductAddEditView(Product())));
-                    }
-                )
-              ],
-            ),
           ),
           body: Form(
             key: _formKey,

@@ -1,10 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_free_commerce/controllers/cart_controller.dart';
+import 'package:flutter_free_commerce/models/profile_models.dart';
 import 'package:flutter_free_commerce/views/auth_view.dart';
+import 'package:flutter_free_commerce/views/cart_view.dart';
 import 'package:flutter_free_commerce/views/home_view.dart';
 import 'package:flutter_free_commerce/views/price_details.dart';
+import 'package:flutter_free_commerce/views/profile_view.dart';
 import 'package:flutter_free_commerce/views/shop_view.dart';
+import 'package:flutter_free_commerce/views/widgets/cart_icon.dart';
+import 'package:flutter_free_commerce/views/widgets/profile_update.dart';
 
 
 final cart = CartController();
@@ -33,7 +38,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Flutter e-commerce',
       home:
-      initialized ? PriceDetails() : Center(child: CircularProgressIndicator()),
+      initialized ? AuthView(): Center(child: CircularProgressIndicator()),
     );
   }
 
