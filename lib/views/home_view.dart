@@ -77,7 +77,25 @@ class _HomeViewState extends State<HomeView> {
                             builder: (context) => ProfileUpdate()));
                   }
                 },
-              )
+              ),
+              ListTile(
+                  leading: Icon(Icons.person),
+                  title: Text("Account"),
+                  subtitle: Text("Personal"),
+                  trailing: Icon(Icons.edit),
+                  onTap: () {}),
+              ListTile(
+                  leading: Icon(Icons.email),
+                  title: Text("Email"),
+                  subtitle: Text("parmujr@gmail.com"),
+                  trailing: Icon(Icons.send),
+                  onTap: () {}),
+              ListTile(
+                  leading: Icon(Icons.phone_android),
+                  title: Text("Phone"),
+                  subtitle: Text("8968909754"),
+                  trailing: Icon(Icons.call),
+                  onTap: () {})
             ],
           ),
         ),
