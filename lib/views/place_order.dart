@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_free_commerce/models/delivery_models.dart';
+import 'package:flutter_free_commerce/views/order_view.dart';
 
 
 class PlaceOrder extends StatefulWidget {
@@ -82,7 +83,10 @@ class _PlaceOrderState extends State<PlaceOrder> {
                   ElevatedButton(
                     child: Text("Place Order"),
                     onPressed: () {
-
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                          builder: (context) => OrderView(this.order)));
 
                     },
                   )

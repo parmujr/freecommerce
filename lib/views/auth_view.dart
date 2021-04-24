@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_free_commerce/controllers/product_controller.dart';
+import 'package:flutter_free_commerce/views/first_page.dart';
 import 'package:flutter_free_commerce/views/home_view.dart';
-import 'package:flutter_free_commerce/views/sign_in.dart';
 
 class AuthView extends StatefulWidget {
   @override
@@ -29,7 +29,7 @@ class _AuthViewState extends State<AuthView> {
         } else {
           var user = snapshot.data;
           if (user == null) {
-            return SignInView();
+            return FirstPage();
           } else {
             return HomeView();
           }

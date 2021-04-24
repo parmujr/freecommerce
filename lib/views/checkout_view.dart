@@ -1,5 +1,4 @@
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_free_commerce/models/models.dart';
 import 'package:flutter_free_commerce/views/place_order.dart';

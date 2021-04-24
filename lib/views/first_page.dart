@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_free_commerce/controllers/auth_controller.dart';
-import 'package:flutter_free_commerce/views/shop_view.dart';
 
 
 class FirstPage extends StatefulWidget {
@@ -142,13 +141,13 @@ class _FirstPageState extends State<FirstPage> {
                               ElevatedButton(
                                   onPressed: () {
                                     signInWithGoogle();
-                                    final snackBar = SnackBar(
-                                        backgroundColor: Colors.red,
-                                        content: Text('Your Account Has Been Logged In Successfully'));
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(snackBar);
-                                    Navigator.push(context, MaterialPageRoute(builder:
-                                        (context) => ShopView()));
+                                    // final snackBar = SnackBar(
+                                    //     backgroundColor: Colors.red,
+                                    //     content: Text('Your Account Has Been Logged In Successfully'));
+                                    // ScaffoldMessenger.of(context)
+                                    //     .showSnackBar(snackBar);
+                                    // Navigator.push(context, MaterialPageRoute(builder:
+                                    //     (context) => HomeView()));
                                   },
                                   child: Container(
                                     height: 50,
