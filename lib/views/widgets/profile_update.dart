@@ -8,21 +8,13 @@ import '../profile_view.dart';
 // ignore: must_be_immutable
 class ProfileUpdate extends StatefulWidget {
   Profile profile = Profile();
-
   ProfileUpdate({this.profile});
-
   @override
-
   _ProfileUpdateState createState() => _ProfileUpdateState();
 }
-
 class _ProfileUpdateState extends State<ProfileUpdate> {
   Profile profile = Profile();
-
-
-
   final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(

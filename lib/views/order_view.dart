@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_free_commerce/models/delivery_models.dart';
+import 'package:flutter_free_commerce/views/place_order.dart';
 
 // ignore: must_be_immutable
 class OrderView extends StatelessWidget {
@@ -20,7 +21,11 @@ class OrderView extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.edit),
             onPressed: () {
-
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          PlaceOrder()));
             },
           )
         ],
@@ -55,42 +60,42 @@ class OrderView extends StatelessWidget {
           ],
         ),
       ),
-      body: Container(
-        padding: EdgeInsets.all(20.0),
-        child: ListView(
-          children: [
+        body: Container(
+          padding: EdgeInsets.all(20.0),
+          child: ListView(
+            children: [
 
-            Icon(
-              Icons.person,
-              size: 70,
-            ),
-            ListTile(
-              title: Text(
-                order.buyer ?? '',
+              Icon(
+                Icons.person,
+                size: 70,
               ),
-              subtitle: Text("Full Name"),
-            ),
-            ListTile(
-              title: Text(
-                order.deliveryAddress ?? '',
+              ListTile(
+                title: Text(
+                  order.name ?? '',
+                ),
+                subtitle: Text("Full Name"),
               ),
-              subtitle: Text("Address"),
-            ),
-            ListTile(
-              title: Text(
-                order.products ?? '',
+              ListTile(
+                title: Text(
+                  order.address ?? '',
+                ),
+                subtitle: Text("Delivery Address"),
               ),
-            //   subtitle: Text("Email Id"),
-            // ),
-            // ListTile(
-            //   title: Text(
-            //     _profile.phone ?? '',
-            //   ),
-            //   subtitle: Text("Mobile Number"),
-            ),
-          ],
-        ),
-      ),
+              ListTile(
+                title: Text(
+                  order.email ?? '',
+                ),
+                subtitle: Text("Email Id"),
+              ),
+              ListTile(
+                title: Text(
+                  order.phone ?? '',
+                ),
+                subtitle: Text("Mobile Number"),
+              ),
+            ],
+          ),
+        )
     );
 
   }
