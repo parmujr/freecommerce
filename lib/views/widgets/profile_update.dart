@@ -63,13 +63,13 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
           body: Form(
             key: _formKey,
             child: ListView(
-              padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10.0),
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               children: [
                 TextFormField(
                   initialValue: profile.name,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.zero)),
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
                       labelText: "Name"),
                   validator: (value) =>
                   value.isEmpty ? "Please enter your name" : null,
@@ -82,7 +82,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                   initialValue: profile.address,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.zero)),
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
                       labelText: "Address"),
                   validator: (value) =>
                   value.isEmpty ? "Please enter your address" : null,
@@ -96,7 +96,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                   initialValue: profile.email,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.zero)),
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
                       labelText: "Email"),
                   validator: (value) =>
                   value.isEmpty ? "Please enter your email id" : null,
@@ -110,7 +110,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                   initialValue: profile.phone,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.zero)),
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
                       labelText: "Phone"),
                   validator: (value) =>
                   value.isEmpty ? "Please enter your phone no" : null,

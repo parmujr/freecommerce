@@ -1,12 +1,19 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_free_commerce/controllers/auth_controller.dart';
-
+import 'package:flutter_free_commerce/views/home_view.dart';
+import 'package:flutter_free_commerce/views/sign_up.dart';
 
 class FirstPage extends StatefulWidget {
   @override
   _FirstPageState createState() => _FirstPageState();
 }
+
+// ignore: non_constant_identifier_names
+final Auth = FirebaseAuth.instance;
+String email;
+String password;
 
 class _FirstPageState extends State<FirstPage> {
   @override
@@ -23,7 +30,7 @@ class _FirstPageState extends State<FirstPage> {
         child: ListView(
           children: [
             SizedBox(
-              height: 50,
+              height: 35,
             ),
             Padding(
               padding: EdgeInsets.all(20),
@@ -37,9 +44,6 @@ class _FirstPageState extends State<FirstPage> {
                         fontSize: 50,
                         fontWeight: FontWeight.w800),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
                   Text(
                     "welcome",
                     style: TextStyle(color: Colors.white, fontSize: 30),
@@ -48,7 +52,7 @@ class _FirstPageState extends State<FirstPage> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 10,
             ),
             Expanded(
                 child: Container(
@@ -73,110 +77,167 @@ class _FirstPageState extends State<FirstPage> {
                         children: [
                           Container(
                             padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                                border: Border(
-                                    bottom:
-                                        BorderSide(color: Colors.grey[200]))),
                             child: TextFormField(
-                              decoration: InputDecoration(
+                                decoration: InputDecoration(
                                   labelText: "Enter your Email or Phone",
                                   hintText: "Email or Phone",
                                   hintStyle: TextStyle(color: Colors.grey),
-                                  border: InputBorder.none),
-                            ),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10))),
+                                ),
+                                onChanged: (value) {
+                                  email = value;
+                                }),
                           ),
                           Container(
                             padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                                border: Border(
-                                    bottom:
-                                        BorderSide(color: Colors.grey[200]))),
                             child: TextFormField(
                               decoration: InputDecoration(
-                                  labelText: "Enter your password",
-                                  hintText: "Password",
-                                  hintStyle: TextStyle(color: Colors.grey),
-                                  border: InputBorder.none),
+                                labelText: "Enter your password",
+                                hintText: "Password",
+                                hintStyle: TextStyle(color: Colors.grey),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                ),
+                              ),
+                              onChanged: (value) {
+                                password = value;
+                              },
                               obscureText: true,
                             ),
                           ),
                           SizedBox(
-                            height: 30,
+                            height: 10,
                           ),
                           Text("Forget Password?",
                               style: TextStyle(color: Colors.grey)),
                           SizedBox(
-                            height: 30,
+                            height: 20,
                           ),
                           Container(
                             height: 50,
                             width: 150,
                             child: RaisedButton(
-                              color: Colors.blue,
+                                color: Colors.blue,
+                                child: Center(
+                                  child: Text(
+                                    "Login",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                onPressed: () async {
+                                  {
+                                    try {
+                                      final user = Auth
+                                              .signInWithEmailAndPassword(
+                                                  email: email,
+                                                  password: password)
+                                          .then((user) => Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                          HomeView())));
+                                    } catch (e) {
+                                      print(e);
+                                    }
+                                  }
+                                }),
+                          ),
+                          SizedBox(height: 20),
+                          Text("Don't have account",
+                              style: TextStyle(color: Colors.grey)),
+                          SizedBox(height: 10),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            height: 50,
+                            width: 150,
+                            child: RaisedButton(
+                              color: Colors.redAccent,
                               child: Center(
                                 child: Text(
-                                  "Login",
+                                  "Sign Up",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            SignUp()));
+                              },
                             ),
                           ),
                           SizedBox(
-                            height: 30,
+                            height: 20,
                           ),
                           Text(
                             "Continue with social media",
                             style: TextStyle(
-                                color: Colors.pinkAccent,
+                                color: Colors.black,
                                 fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
-                            height: 40,
+                            height: 11,
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              ElevatedButton(
-                                  onPressed: () {
-                                    signInWithGoogle();
-                                    // final snackBar = SnackBar(
-                                    //     backgroundColor: Colors.red,
-                                    //     content: Text('Your Account Has Been Logged In Successfully'));
-                                    // ScaffoldMessenger.of(context)
-                                    //     .showSnackBar(snackBar);
-                                    // Navigator.push(context, MaterialPageRoute(builder:
-                                    //     (context) => HomeView()));
-                                  },
-                                  child: Container(
-                                    height: 50,
-                                    width: 65,
-                                    child: Center(
-                                      child: Text(
-                                        "Google",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                  )),
-                              SizedBox(
-                                width: 125,
+                              GestureDetector(
+                                child: Container(
+                                  height: 50,
+                                  width: 50,
+                                  child: Center(
+                                    child: Image.network(
+                                        'https://kgo.googleusercontent.com/profile_vrt_raw_bytes_1587515358_10512.png'),
+                                  ),
+                                ),
+                                onTap: () {
+                                  signInWithGoogle();
+                                },
                               ),
-                              ElevatedButton(
-                                  onPressed: () {},
-                                  child: Container(
-                                    height: 50,
-                                    child: Center(
-                                      child: Text(
-                                        "Facebook",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                  ))
+                              Container(
+                                height: 50,
+                                width: 50,
+                                child: Center(
+                                  child: Image.network(
+                                      'https://www.sharethis.com/wp-content/uploads/2017/11/Facebook-share-icon.png'),
+                                ),
+                              ),
+                              Container(
+                                height: 50,
+                                width: 50,
+                                child: Center(
+                                  child: Image.network(
+                                      'https://cdn4.iconfinder.com/data/icons/social-media-icons-the-circle-set/48/twitter_circle-512.png'),
+                                ),
+                              ),
+                              Container(
+                                height: 50,
+                                width: 50,
+                                child: Center(
+                                  child: Image.network(
+                                      'https://images.vexels.com/media/users/3/137380/isolated/preview/1b2ca367caa7eff8b45c09ec09b44c16-instagram-icon-logo-by-vexels.png'),
+                                ),
+                              ),
+                              Container(
+                                height: 50,
+                                width: 50,
+                                child: Center(
+                                  child: Image.network(
+                                      'https://image.flaticon.com/icons/png/512/25/25231.png'),
+                                ),
+                              ),
                             ],
                           )
                         ],
