@@ -19,17 +19,10 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
       appBar: AppBar(title: Text('Registration'),),
       body: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-            gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-          Colors.orange[900],
-          Colors.orange[800],
-          Colors.orange[400],
-        ])),
         child: ListView(
           children: [
             SizedBox(
-              height: 10,
+              height: 50,
             ),
             Padding(
               padding: EdgeInsets.all(20),
@@ -37,15 +30,15 @@ class _SignUpState extends State<SignUp> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "Buy Easy",
+                    "E-Commerce",
                     style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.red,
                         fontSize: 50,
                         fontWeight: FontWeight.w800),
                   ),
                   Text(
-                    "welcome",
-                    style: TextStyle(color: Colors.white, fontSize: 30),
+                    "Registration",
+                    style: TextStyle(color: Colors.pinkAccent, fontSize: 30),
                   )
                 ],
               ),
@@ -54,19 +47,8 @@ class _SignUpState extends State<SignUp> {
               height: 50,
             ),
             Expanded(
-                child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(60),
-                      topRight: Radius.circular(60))),
-              child: Padding(
-                padding: EdgeInsets.all(20),
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: 80,
-                    ),
                     Container(
                       padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
@@ -104,28 +86,6 @@ class _SignUpState extends State<SignUp> {
                               ),
                               onChanged: (value) {
                                 password = value;
-                              },
-                              obscureText: true,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(10),
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                labelText: "ReEnter your password",
-                                hintText: "Password",
-                                hintStyle: TextStyle(color: Colors.grey),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                ),
-                              ),
-                              onChanged: (value) {
-                                reEnterPassword = value;
                               },
                               obscureText: true,
                             ),
@@ -169,8 +129,8 @@ class _SignUpState extends State<SignUp> {
                     )
                   ],
                 ),
-              ),
-            ))
+
+            )
           ],
         ),
       ),

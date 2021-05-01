@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_free_commerce/main.dart';
 import 'package:flutter_free_commerce/models/models.dart';
@@ -22,6 +23,7 @@ class _ProductViewState extends State<ProductView> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+
           title: Text("${widget.product.name}"),
           actions: [
             IconButton(
@@ -33,6 +35,11 @@ class _ProductViewState extends State<ProductView> {
                       builder: (context) => ProductAddEditView(widget.product)),
                 );
                 setState(() {});
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
               },
             ),
             CartIcon()
@@ -66,13 +73,17 @@ class _ProductViewState extends State<ProductView> {
                   ElevatedButton(
                       onPressed: () {
                         cart.products.add(widget.product);
-
+                        FirebaseFirestore.instance
+                            .collection("Cart")
+                            .doc(widget.product.id)
+                            .set(widget.product.toMap(),
+                            SetOptions(merge: true));
                         /// show snack for confirmation
-                        final snak = SnackBar(
+                        final snack = SnackBar(
                           content: Text(
                               "${widget.product.name} is added to your cart"),
                         );
-                        ScaffoldMessenger.of(context).showSnackBar(snak);
+                        ScaffoldMessenger.of(context).showSnackBar(snack);
                       },
                       child: Text('Add to Cart')),
                   ElevatedButton(
